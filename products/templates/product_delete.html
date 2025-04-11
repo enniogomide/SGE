@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block subtitle %}
+    <h3>SGE - Produto</h3>
+{% endblock %}
+
+{% block content %}
+    <div class="container mt-4">
+        <h4 class="display-6">Excluir Produto</h4>
+
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">{{ object.title }}</h4>
+                <p class="card-text">Marca: <strong>{{ object.brand }}</strong></p>
+                <p class="card-text">Categoria: <strong>{{ object.category }}</strong></p>
+                <p class="card-text">Confirma que deseja <strong>Excluir esse Produto</strong></p>
+
+                <form method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger mt-3">Excluir</button>
+                </form>
+            </div>
+        </div>
+        <a href="{% url 'product_list' %}" class="btn btn-secondary mt-3">Voltar para Lista</a>
+    </div>
+{% endblock %}
