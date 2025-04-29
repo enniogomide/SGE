@@ -1,0 +1,24 @@
+services:
+
+  sge_web:
+    build: .
+    restart: always
+    ports:
+      - 8000:8000
+    depends_on:
+      - sge_db
+      
+  sge_db:
+    image: postgres:latest
+    ports:
+      - 5432:5432
+    volumes:
+        - postgres_data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER: *
+      - POSTGRES_PASSWORD: *
+      - POSTGRES_DB: sge
+      
+volumes:
+        postgres_data:
+
