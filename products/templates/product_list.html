@@ -1,57 +1,71 @@
 {% extends 'base.html' %}
 
 {% block subtitle %}
-    <h3>SGE - Produtos</h3>
+    <h4>SGE - Produtos</h4>
 {% endblock %}
 
 {% block content %}
     {% if perms.products.view_products and perms.inflow.view_inflow %}
         {% include 'components/_product_metrics.html' %}
     {% endif %}
-    <div class="mb-4"></div>
-    <div class="row mb-3">
-        <div class="col-md-6">
-            <form method="get" action="{% url 'product_list' %}">
-                <div class="input-group">
-                <input type="text" class="form-control" name="title" placeholder="Nome Produto" value="{{ request.GET.title }}">
-                <input type="text" class="form-control" name="serie_number" placeholder="Numero de Série" value="{{ request.GET.serie_number }}">
-                <button type="submit" class="btn btn-primary">
-                    <i class="bi bi-search"></i>
-                </button>
-                </div>
-            </form>
-        </div>
-        {% if perms.products.add_product %}
-            <div class="col-md-6">
-                <a href="{% url 'product_create' %}" class="btn btn-success float-end">
-                    <i class="bi bi-plus"></i> Novo Produto
-                </a>
+    <div class="mb-2"></div>
+    <div class="mb-2">
+        <div class="row mb-3 ju">
+            <div class="col-md-8">
+                <form method="get" action="{% url 'product_list' %}">
+                    <div class="input-group">
+                        <div class="col">
+                            <input type="text" class="form-control" name="title" placeholder="Nome Produto" value="{{ request.GET.title }}">
+                        </div>
+                        <div class="col">
+                            <input type="text" class="form-control" name="serie_number" placeholder="Numero de Série" value="{{ request.GET.serie_number }}">
+                        </div>
+                        <div class="col">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="bi bi-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
             </div>
-        {% endif %}
-    </div>
-    <div class="row mb-3">
-        <div class="col-md-3">
-            <form method="get" action="{% url 'product_list' %}">
-                <div class="ïnput-group">
-                    <select class="form-select" name="brand">
-                        <option value = "" {% if not request.GET.brand %} selected {% endif %}>Todas Marcas</option>
-                        {% for brand in brands %}
-                            <option value="{{ brand.id }}"
-                                {% if request.GET.brand == brand.id %} selected {% endif %}>{{ brand.name }}</option>
-                        {% endfor %}
-                    </select>
-                    <select class="form-select" name="category">
-                        <option value = "" {% if not request.GET.category %} selected {% endif %}>Todas Categorias</option>
-                        {% for category in categories %}
-                            <option value="{{ category.id }}"
-                                {% if request.GET.category == category.id %} {% endif %}>{{ category.name }}</option>
-                        {% endfor %}    
-                    </select>
-                    <button type="submit" class="btn btn-primary">
-                        <i class="bi bi-filter"></i>Filtrar
-                    </button>
+            {% if perms.products.add_product %}
+                <div class="col-md-4">
+                    <a href="{% url 'product_create' %}" class="btn btn-success float-end">
+                        <i class="bi bi-plus"></i> Novo Produto
+                    </a>
                 </div>
-            </form>
+            {% endif %}
+        </div>
+        <div class="row mb-6">
+            <div class="col-md-12">
+                <form method="get" action="{% url 'product_list' %}">
+                    <div class="ïnput-group row row-cols-12">
+                        <div class="col">
+                            <select class="form-select" name="brand">
+                                <option value = "" {% if not request.GET.brand %} selected {% endif %}>Todas Marcas</option>
+                                {% for brand in brands %}
+                                    <option value="{{ brand.id }}"
+                                        {% if request.GET.brand == brand.id %} selected {% endif %}>{{ brand.name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="col">
+                            <select class="form-select" name="category">
+                                <option value = "" {% if not request.GET.category %} selected {% endif %}>Todas Categorias</option>
+                                {% for category in categories %}
+                                    <option value="{{ category.id }}"
+                                        {% if request.GET.category == category.id %} {% endif %}>{{ category.name }}</option>
+                                {% endfor %}    
+                            </select>
+                        </div>
+                        <div class="col">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="bi bi-filter"></i>Filtrar
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
     <div class="table-responsive">

@@ -1,21 +1,21 @@
 {% extends 'base.html' %}
 
 {% block subtitle %}
-    <h3>SGE - Entradas</h3>
+    <h4>SGE - Entradas</h4>
 {% endblock %}
 
 {% block content %}
 
     <div class="row mb-3">
         <div class="col-md-6">
-        <form method="get" action="{% url 'inflow_list' %}">
-            <div class="input-group">
-            <input type="text" class="form-control" name="product" placeholder="Produto" value="{{ request.GET.product }}">
-            <button type="submit" class="btn btn-primary">
-                <i class="bi bi-search"></i>
-            </button>
-            </div>
-        </form>
+            <form method="get" action="{% url 'inflow_list' %}">
+                <div class="input-group">
+                <input type="text" class="form-control" name="product" placeholder="Produto" value="{{ request.GET.product }}">
+                <button type="submit" class="btn btn-primary">
+                    <i class="bi bi-search"></i>
+                </button>
+                </div>
+            </form>
         </div>
         <div class="col-md-6">
             {% if perms.inflow.add_inflow %}
